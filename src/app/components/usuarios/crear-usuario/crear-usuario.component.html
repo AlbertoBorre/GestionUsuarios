@@ -1,0 +1,107 @@
+<div class="container mt-4">
+  <div class="row mb-4">
+    <div class="col">
+      <h1>Crear nuevo usuario</h1>
+    </div>
+  </div>
+
+  <form [formGroup]="usuarioForm" (ngSubmit)="onSubmit()">
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label for="nombre" class="form-label">Nombre *</label>
+        <input type="text" class="form-control" id="nombre" formControlName="nombre"
+          [ngClass]="{ 'is-invalid': isValido && user['nombre'].errors }">
+        <div *ngIf="isValido && user['nombre'].errors" class="invalid-feedback">
+          <div *ngIf="user['nombre'].errors['required']">El nombre es obligatorio</div>
+          <div *ngIf="user['nombre'].errors['minlength']">El nombre debe tener al menos 1 caracter</div>
+        </div>
+      </div>
+
+      <div class="col-md-6 mb-3">
+        <label for="apellidos" class="form-label">Apellidos *</label>
+        <input type="text" class="form-control" id="apellidos" formControlName="apellidos"
+          [ngClass]="{ 'is-invalid': isValido && user['apellidos'].errors }">
+        <div *ngIf="isValido && user['apellidos'].errors" class="invalid-feedback">
+          <div *ngIf="user['apellidos'].errors['required']">Los apellidos son obligatorios</div>
+          <div *ngIf="user['apellidos'].errors['minlength']">Los apellidos deben tener al menos 1 caracter</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label for="correoElectronico" class="form-label">Correo Electrónico *</label>
+        <input type="email" class="form-control" id="correoElectronico" formControlName="correoElectronico"
+          [ngClass]="{ 'is-invalid': isValido && user['correoElectronico'].errors }">
+        <div *ngIf="isValido && user['correoElectronico'].errors" class="invalid-feedback">
+          <div *ngIf="user['correoElectronico'].errors['required']">El correo electrónico es obligatorio</div>
+          <div *ngIf="user['correoElectronico'].errors['email']">El correo electrónico no tiene un formato válido</div>
+        </div>
+      </div>
+
+      <div class="col-md-6 mb-3">
+        <label for="contraseña" class="form-label">Contraseña *</label>
+        <input type="password" class="form-control" id="contraseña" formControlName="contraseña"
+          [ngClass]="{ 'is-invalid': isValido && user['contraseña'].errors }">
+        <div *ngIf="isValido && user['contraseña'].errors" class="invalid-feedback">
+          <div *ngIf="user['contraseña'].errors['required']">La contraseña es obligatoria</div>
+          <div *ngIf="user['contraseña'].errors['minlength']">La contraseña debe tener al menos 8 caracteres</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label for="rol" class="form-label">Rol *</label>
+        <select class="form-select" id="rol" formControlName="rol"
+          [ngClass]="{ 'is-invalid': isValido && user['rol'].errors }">
+          <option value="" disabled>Seleccione un rol</option>
+          <option *ngFor="let rol of roles" [value]="rol">{{ rol }}</option>
+        </select>
+        <div *ngIf="isValido && user['rol'].errors" class="invalid-feedback">
+          <div *ngIf="user['rol'].errors['required']">El rol es obligatorio</div>
+        </div>
+      </div>
+
+      <div class="col-md-6 mb-3">
+        <label for="estado" class="form-label">Estado *</label>
+        <select class="form-select" id="estado" formControlName="estado"
+          [ngClass]="{ 'is-invalid': isValido && user['estado'].errors }">
+          <option *ngFor="let estado of estados" [value]="estado">{{ estado }}</option>
+        </select>
+        <div *ngIf="isValido && user['estado'].errors" class="invalid-feedback">
+          <div *ngIf="user['estado'].errors['required']">El estado es obligatorio</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4 mb-3">
+        <label for="telefono" class="form-label">Teléfono *</label>
+        <input type="text" class="form-control" id="telefono" formControlName="telefono"
+          [ngClass]="{ 'is-invalid': isValido && user['telefono'].errors }">
+        <div *ngIf="isValido && user['telefono'].errors" class="invalid-feedback">
+          <div *ngIf="user['telefono'].errors['required']">El teléfono es obligatorio</div>
+          <div *ngIf="user['telefono'].errors['pattern']">El teléfono debe tener entre 9 y 15 dígitos</div>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-3">
+        <label for="empresa" class="form-label">Empresa</label>
+        <input type="text" class="form-control" id="empresa" formControlName="empresa">
+      </div>
+      
+      <div class="col-md-4 mb-3">
+        <label for="ciudad" class="form-label">Ciudad</label>
+        <input type="text" class="form-control" id="ciudad" formControlName="ciudad">
+      </div>
+    </div>
+
+    <div class="row mt-4">
+      <div class="col text-end">
+        <button type="button" class="btn btn-secondary me-2" (click)="cancelar()">Cancelar</button>
+        <button type="submit" class="btn btn-primary">Crear Usuario</button>
+      </div>
+    </div>
+  </form>
+</div>
